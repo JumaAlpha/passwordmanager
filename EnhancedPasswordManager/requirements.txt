@@ -1,0 +1,7 @@
+bcrypt
+pycryptodome
+pandas
+openpyxl
+pytest
+tkinter
+flask

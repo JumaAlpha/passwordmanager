@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-color: #1b1b1b; /* Dark background */
+            color: #00ff00; /* Green text color */
+            font-family: 'Courier New', Courier, monospace; /* Monospace font */
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+            font-size: 2em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #00ff00; /* Green border */
+            padding: 10px;
+            text-align: left;
+            background-color: #222; /* Darker background for table */
+        }
+        th {
+            background-color: #333; /* Slightly lighter for headers */
+        }
+        button.copy-password {
+            background-color: #00ff00;
+            border: none;
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        button.copy-password:hover {
+            background-color: #00cc00; /* Darker green on hover */
+        }
+        .disclaimer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #ff0000; /* Red for disclaimer */
+        }
+        a {
+            color: #00ff00; /* Green link color */
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        // Function to copy password to clipboard
+        function copyToClipboard(password) {
+            navigator.clipboard.writeText(password)
+                .then(() => {
+                    alert('Password copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Could not copy password: ', err);
+                });
+        }
+    </script>
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    
+    <h2>Welcome to Your Password Manager</h2>
+    
+    <table>
+        <tr>
+            <th>Service</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Actions</th>
+        </tr>
+        {% for service, email, username, password in passwords %}
+        <tr>
+            <td>{{ service }}</td>
+            <td>{{ email }}</td>
+            <td>{{ username }}</td>
+            <td>{{ password if password != 'Error' else 'Error decrypting password' }}</td>
+            <td>
+                <button class="copy-password" onclick="copyToClipboard('{{ password if password != 'Error' else '' }}')">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <div class="disclaimer">
+        CRUD operations can only be performed within the app itself.
+    </div>
+    
+    <br>
+    <a href="/add_password">Add New Password</a>
+    <br>
+    <a href="/logout">Logout</a>
+</body>
+</html>

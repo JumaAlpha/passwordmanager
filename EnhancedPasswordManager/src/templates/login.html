@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body {
+            background-color: #1a1a1a; /* Dark background */
+            color: #00ff00; /* Green text color */
+            font-family: 'Courier New', Courier, monospace; /* Monospace font */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; /* Glowing effect */
+        }
+
+        form {
+            background-color: #333; /* Dark form background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #00ff00; /* Glowing shadow */
+            transition: box-shadow 0.3s ease; /* Transition effect */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 250px;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #444; /* Input field background */
+            color: #00ff00; /* Text color */
+            font-size: 1em;
+            outline: none;
+            transition: background-color 0.3s; /* Transition effect */
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            background-color: #555; /* Lighter background on focus */
+        }
+
+        button {
+            background-color: #00ff00; /* Button color */
+            color: #1a1a1a; /* Button text color */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s; /* Transition effects */
+        }
+
+        button:hover {
+            background-color: #1a1a1a; /* Darker on hover */
+            color: #00ff00; /* Change text color on hover */
+            transform: scale(1.05); /* Slightly enlarge on hover */
+        }
+
+        /* Adding a glitch effect */
+        @keyframes glitch {
+            0% {transform: translate(2px, 0);}
+            20% {transform: translate(-2px, 0);}
+            40% {transform: translate(2px, 0);}
+            60% {transform: translate(-2px, 0);}
+            80% {transform: translate(2px, 0);}
+            100% {transform: translate(0, 0);}
+        }
+
+        .glitch {
+            animation: glitch 1s infinite; /* Glitch animation */
+        }
+    </style>
+</head>
+<body>
+    <h2 class="glitch">Login to Enhanced Password Manager</h2>
+    <form action="/login" method="post">
+        <label>Username:</label>
+        <input type="text" name="username" required>
+        <br>
+        <label>Password:</label>
+        <input type="password" name="password" required>
+        <br>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
